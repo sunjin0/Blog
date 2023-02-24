@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head >
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!--    标题图片-->
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
+    <title>博客详情</title>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" th:href="@{../static/css/bootstrap.min.css}">
+    <link href="../static/css/typo.css" rel="stylesheet" th:href="@{../static/css/typo.css}">
+    <link href="../static/css/animate.css" rel="stylesheet" th:href="@{../static/css/typo.css}">
+    <link href="../static/css/prism.css" rel="stylesheet" th:href="@{../static/css/prism.css}">
+    <link href="../static/font/iconfont.css" rel="stylesheet" th:href="@{../static/font/iconfont.css}">
+    <link href="../static/css/index.css" rel="stylesheet" th:href="@{../static/css/index.css}">
+    <script src="../static/js/jsTool/jQuery.js" th:href="@{../static/js/jsTool/jQuery.js}"></script>
+    <script src="../static/js/jsTool/bootstrap.min.js" th:href="@{../static/js/jsTool/bootstrap.min.js}"></script>
+    <script src="../static/js/index.js" th:href="@{../static/js/index.js}"></script>
+    <script src="../static/js/jsTool/prism.js" th:href="@{../static/js/jsTool/prism.js}"></script>
+    <script src="../static/js/jsTool/form.js"></script>
+</head>
+<style>
+    .panel .list-group{
+        margin: 0;
+    }
+    .panel .list-group-item{
+        padding: 0 10px;
+    }
+    .author{
+        padding: 5px 0 0;
+    }
+    .info,.fatherinfo{
+        font-size: 12px;
+    }
+</style>
+<body>
+    <div class="container-fluid">
+        <!-- 导航 -->
+        <div class="row" th:replace="index::index_nav">
+            <nav class="navbar navbar-default index_nav navbar-static-top">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1"
+                            data-toggle="collapse" type="button">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <span class="navbar-brand">Sun</span>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/templates/index.html">首页</a></li>
+                            <li><a href="/templates/classify.html">分类</a></li>
+                            <li><a href="/templates/labels.html">标签</a></li>
+                            <li><a href="/templates/file.html">归档</a></li>
+                            <li><a href="/templates/myself.html">关于我</a></li>
+                        </ul>
+                        <form class="navbar-form navbar-left">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Search" type="text">
+                            </div>
+                            <button class="btn btn-default" type="submit">搜索</button>
+                        </form>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">登入</a></li>
+                            <li><a href="#">注册</a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </div>
+        <!-- 中间内容 -->
+        <div class="container">
+            <div class="panel panel-default panel-success">
+                <div class="panel-heading">
+                    <div class="author">
+                        <img alt="" src="../static/images/tx.jpeg">
+                        <span class="info"><span th:text="${blogDetails.userId==1?'管理员':'其他'}"></span>&nbsp;&nbsp;&nbsp;<i class="glyphicon glyphicon-time"></i><span th:text="${blogDetails.createTime}"></span></span>
+                        <span class="count"> 浏览量: <span th:text="${blogDetails.views}">123</span> </span>
+                    </div>
+                </div>
+                <div class="panel-body typo typo-dl">
+                    <label class="btn btn-xs btn-danger pull-right" th:text="${blogDetails.flag}">原创</label>
+                    <div class="">
+                        <h3 class="h3 typo-h3" id="h3" th:text="${blogDetails.title}">人生像一杯清水</h3>
+                        <div th:utext="${blogDetails.content}">
+                            人生像一杯清水，简简单单，从从容容，纯纯静静。看似寻常，却无时无刻不在滋养着你的生命。人生像一杯咖啡，既苦涩，又有一缕说不出的回味。需要时用它排解寂寞，喝了它又会失眠。失眠的时候就会把曾经翻晒，喝了咖啡的午夜，心头泛起一股特别的酸涩的滋味.....
+                            <br>人生像一杯清水，简简单单，从从容容，纯纯静静.看似寻常，却无时无刻不在滋养着你的生命.人生像一杯咖啡，既苦涩，又有一缕说不出的回味.需要时用它排解寂寞，喝了它又会失眠.失眠的时候就会把曾经翻晒，喝了咖啡的午夜，心头泛起一股特别的酸涩的滋味.
+                            <h5 id="h5-1">人生像一杯茶</h5>
+                            <br>人生像一杯茶，茶热茶凉，炽烈平淡都是一种真实的况味。第一杯茶，就像人生开始追求的浓烈，因为温度太高，要慢慢地一口一口地品它的香味。
+                            <br>人生像一杯茶，茶热茶凉，炽烈平淡都是一种真实的况味.第一杯茶，就像人生开始追求的浓烈，因为温度太高，要慢慢地一口一口地品它的香味.
+                            <h5 id="h5-2">第二杯茶</h5>
+                            <br> 第二杯茶，浓淡适中，恰如品味自己的中年，不再追求华丽和芬芳，明白了淡泊的味道，就像揭开了人生那层似有若无的朦胧。
+                            <br>第二杯茶，浓淡适中，恰如品味自己的中年，不再追求华丽和芬芳，明白了淡泊的味道，就像揭开了人生那层似有若无的朦胧.
+                            <h5 id="h5-3">第三杯茶</h5>
+                            <br>第三杯茶，就像人生行至暮年，懂得了经营，懂得了放下，懂得了风轻云淡的释然，一心轻松行走，一心慈悲待世，心境又回到了天真无邪的孩提......
+                            <br>第三杯茶，就像人生行至暮年，懂得了经营，懂得了放下，懂得了风轻云淡的释然，一心轻松行走，一心慈悲待世，心境又回到了天真无邪的孩提.
+                            <h5 id="h5-4">人生就像写书法</h5>
+                            <br> 人生就像写书法，一横一竖都是笔直善良的行走，一撇一捺都是心灵的修炼。一张纸写得太满，会感觉冗繁，懂得留白，生命也有了自由的舒放和呼吸，更增加了意境和韵味的美感.....
+                            <br>人生就像写书法，一横一竖都是笔直善良的行走，一撇一捺都是心灵的修炼.一张纸写得太满，会感觉冗繁，懂得留白，生命也有了自由的舒放和呼吸，更增加了意境和韵味的美感.
+                            <h5 id="h5-5">人生就像演奏</h5>
+                            <br>人生就像演奏，弹奏的是手指，聆听行走的却是心灵。黑白相间的琴键，起伏落下，恰如人生的苦乐掺半、跌宕起伏。承受得了苦乐掺杂，经得起沉浮历练，才会迸发出触动心弦的乐章，才会难以抑制地感动了自己......
+                            <br>人生就像演奏，弹奏的是手指，聆听行走的却是心灵.黑白相间的琴键，起伏落下，恰如人生的苦乐掺半、跌宕起伏.承受得了苦乐掺杂，经得起沉浮历练，才会迸发出触动心弦的乐章，才会难以抑制地感动了自己.
+
+                            <br>人生就像写作，开头一笔最难写。有时候需要苦吟之后落笔，遗憾和不满意处，总想能有一次机会重新改写。可是人生没有重来，从生下来那一刻开始就注定了不能回头和修改。只有用心、认真地写好了每一个词，每一个段落，全篇才会精彩。
+                            <br> 人生就像写作，开头一笔最难写.有时候需要苦吟之后落笔，遗憾和不满意处，总想能有一次机会重新改写.可是人生没有重来，从生下来那一刻开始就注定了不能回头和修改.只有用心、认真地写好了每一个词，每一个段落，全篇才会精彩.
+                            <h5 id="h5-6">在这趟生命的列车上</h5>
+                            <br>在这趟生命的列车上，我们体验着一切的美好和伤痛，失败和泪水，书写着一个个永生难忘的故事，和我们同行的有缘人，不能永远留在身边，只能把一份美丽和感动铭刻在心底...
+                            <br>人生太短，就像一本书翻开又合上。经过了一个美好的人，让我们知道了生命为何出发，因何而来。世上总有无法占有的东西，人生最美的时光，是你经历了它，并用记忆留住了它，看似失去，却已永远的拥有，那种忘不了的感受，成为了永远的回眸和怀念.....
+                            <pre class="row" >
+                        <code class="language-css">
+                            .release_text{
+                                input,select,label{
+                                    margin-top: 1%;
+                                }
+                                .col-md-12{
+                                    label{
+                                        margin-top: 2%;
+                                        margin-bottom: 2%;
+                                    }
+                                }
+                                textarea{
+                                    margin-top: 1%;
+                                }
+                            }
+                        </code>
+                    </pre>
+                        </div>
+                        <div class="tags">
+                            <a class="btn btn-sm btn-success" href="javascript:" th:each="tag:${tags}" th:text="${tag}"></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="btn btn-default  coin btn-block  " data-target="#myModal3" data-toggle="modal"
+                             style="margin: 2% auto 0;" th:if="${#strings.contains((blogDetails.appreciation),true)}">
+                            赞赏
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div aria-labelledby="myModalLabel" class="modal fade" id="myModal3" role="dialog" tabindex="-1">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
+                                            aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">感谢你赞赏</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <img alt="" src="../static/images/wxm.jpg" width="48%">
+                                    <img alt="" src="../static/images/zfb.jpg" width="48%">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="well">
+                <ul>
+                    <li>作者:<span th:text="${blogDetails.userId==1?'管理员':'其他'}"></span></li>
+                    <li>发表时间: <span th:text="${blogDetails.getCreateTime()}"></span></li>
+                    <li>版权声明: 自由转载-保持署名</li>
+                    <li>公众号转载: 表明出处</li>
+                </ul>
+            </div>
+            <div class="row comments" style="margin: 0">
+<!--                留言-->
+                <div class="panel comments2 panel-default" th:fragment="commentList">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading" id="info">留言区域</div>
+                    <!-- 父回复栏 -->
+                    <ul class="list-group">
+                        <li class="list-group-item" th:each="cm:${comments}">
+                            <div class="author">
+                                <img alt="" src="../static/images/tx.jpeg" style="border-radius: 4px">
+                                <span class="info" th:text="${cm.nickname}">张三</span>
+                                <p class="text" style="color: black" th:text="${cm.content}">你好，现在在哪发达了</p>
+                                <p>
+                                    <span class="showtime" th:text="${#dates.format(cm.createTime,'yyyy-MM-dd HH:mm:ss')}">2022-12-27</span>
+                                    <span>·</span>
+                                    <span class="ip" style="margin-left: 1%" th:text="${cm.ads}">江西</span>
+                                    <span class="father" style="font-size: 12px;margin-left: 1%" th:value="${cm.id}" value="cs">回复</span>
+                                </p>
+<!--                                                            子回复栏-->
+                                <ul class="list-group">
+                                    <li class="list-group-item" th:each="c:${cm.getCommentChildren()}">
+                                        <div class="author" style="margin-left: 3%">
+                                            <img alt="" src="../static/images/tx.jpeg" style="border-radius: 4px">
+                                            <span class="info" th:text="${c.nickname}">李四</span><span class="fatherinfo" th:text="('-->')+${c.fatherName}"></span>
+                                            <p class="text" th:text="${c.content}">现在在哪发达了</p>
+                                            <p>
+                                                <span class="showtime" th:text="${#dates.format(c.createTime,'yyyy-MM-dd HH:mm:ss')}">2022-12-27</span>
+                                                <span>·</span>
+                                                <span class="ip" th:text="${c.ads}">江西</span>
+                                                <span class="father" style="font-size: 12px;margin-left: 1%" th:value="${cm.id}">回复</span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+<!--            留言输入框-->
+            <form action="/comments" class="input_text row" method="get">
+                <input name="parentCommentId" type="hidden">
+                <input name="fatherName" type="hidden">
+                <div class="form-inline col-md-12" style="display: none"> <input class="form-control col-xs-10 col-md-5" name="nickname" placeholder="请输入用户名" type="text"><button class="btn btn-default form-control col-md-1 col-xs-2" type="button">X</button></div>
+                <input name="blogId" th:value="${blogDetails.id}" type="hidden">
+                <div class="col-md-12" style="margin-top: 10px">
+                    <input class="form-control col-md-5 col-xs-12" name="content" placeholder="善语结善缘，恶语伤人心" type="text">
+                    <input class="btn btn-info col-md-1 col-xs-12 conmmentSunmint "  type="button"  value="发送">
+                </div>
+            </form>
+        </div>
+        <!-- 底部 -->
+        <div  class="container-fluid index_bottom row">
+            <div class="row">
+                <ul class="bottom_list">
+                    <li class="col-md-4 col-md-4 hidden-xs"><img alt="扫一扫联系我" src="../static/images/wx.jpg" width="100px"></li>
+                    <li class="col-md-2 col-sm-2 col-xs-6">
+                        <dl>
+                            <dt>最新博客</dt>
+                            <dd>1</dd>
+                            <dd>2</dd>
+                        </dl>
+                    </li>
+                    <li class="col-md-2 col-sm-2 col-xs-6">
+                        <dl>
+                            <dt>联系我</dt>
+                            <dd>Email: 2367283463@qq.com</dd>
+                            <dd>QQ: 2367283463</dd>
+                        </dl>
+                    </li>
+                    <li class="col-md-4 col-sm-4 hidden-xs">
+                        <dl>
+                            <dt>座右铭</dt>
+                            <dd>这是我的个人博客，在这里会分享编程，心得，写作，思考</dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <p>Copyright 2022 -- 2023 @Sun</p>
+            </div>
+        </div>
+        <!-- 侧边栏 -->
+        <div class="side  hidden-xs">
+            <ul class="list-group">
+                <li class="list-group-item cataloy-btn">
+                    目录
+                </li>
+                <li class="list-group-item"><a href="#info" style="color: black;width: 100%">留言</a> </li>
+                <li class="list-group-item"><i class="iconfont icon-weixin-sm"></i></li>
+                <li class="list-group-item top-back" style="display: none;"><i class="iconfont icon-hanhan-01-018"></i></li>
+            </ul>
+            <ul class="list-group cataloy" style="display: none;">
+                <li class="list-group-item cataloy-btn" style="font-size: 5px; color: gray;">点击关闭</li>
+             </ul>
+        </div>
+        <!-- 侧边栏mini -->
+        <div class="side side-mini hidden-lg hidden-md hidden-sm">
+            <ul class="list-group">
+                <li class="list-group-item cataloy-btn">
+                    目录
+                </li>
+                <li class="list-group-item"><a href="#info" style="color: black;width: 100%">留言</a> </li>
+                <li class="list-group-item"><i class="iconfont icon-weixin-sm"></i></li>
+                <li class="list-group-item top-back" style="display: none;"><i class="iconfont icon-hanhan-01-018"></i></li>
+            </ul>
+            <ul class="list-group cataloy" style="display: none;">
+                <li class="list-group-item cataloy-btn" style="font-size: 5px; color: gray;">点击关闭</li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+    $(function () {
+        //用户名框销失
+        $("[name=content]").click(function () {
+            if ($("[name=nickname]").val()==""){
+                $(".input_text .form-inline").show();
+            }else {
+                $(".input_text .form-inline").hide();
+            }
+        });
+        //用户名框隐藏
+        $(".form-inline>.btn").click(function () {
+            $(".input_text .form-inline").hide();
+        });
+        //评论局部刷新
+        $(".conmmentSunmint").click(function () {
+            if($("[name=content]").val()!=""&&$("[name=nickname]").val()){
+                //表单提交，使用回调函数局部刷新页面
+                $(".input_text").ajaxSubmit({
+                    success:function (data) {
+                        $(".comments2").remove();
+                        $(".comments").append(data);
+                        $("[name=content]").val("")
+                    }
+                })
+            }else {
+                alert("填写信息后发送")
+            }
+        });
+        //评论回复
+        $(".father").click(function () {
+            $("[name=parentCommentId]").val($(this).attr("value"));
+            $("[name=content]").attr("placeholder","@"+$(this).parent().siblings(".info").text())
+            $("[name=fatherName]").val($(this).parent().siblings(".info").text())
+        });
+        //搜索提示
+        $("#search_text").bind("input propertychange",function () {
+            if ($(this).val()!=""){
+                $.ajax({
+                    url:"/search_hint"+$("#search_text").val(),
+                    type:"get",
+                    dataType:"json",
+                    success:function (data) {
+                        $(".search_hint").empty()
+                        if(data.length!=0){
+                            for (let i = 0; i < data.length; i++) {
+                                let elem=$("<li></li>").attr("value", data[i].title)
+                                let a=$("<a></a>").attr("href","/blogDetails/"+data[i].id).attr("target","_blank").text( data[i].title)
+                                elem.append(a)
+                                $(".search_hint").append(elem)
+
+                            }
+                        }else{
+                            $(".search_hint").append("<li>没有查到任何数据</li>")
+                        }
+                    },
+                    error:function () {
+                        alert("出错了")
+                    }
+                })
+            }
+        })
+        //点击该盒子外的空间关闭这个窗口，点击这个盒子不会关闭
+        $("body").click(function (e) {
+            if (!$(e.target).closest(".search_hint").length)
+                $(".search_hint").empty()
+        })
+    })
+</script>
+</html>

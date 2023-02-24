@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!--    标题图片-->
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
+    <title>博客</title>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/index.css" rel="stylesheet">
+    <script src="../static/js/jsTool/jQuery.js"></script>
+    <script src="../static/js/jsTool/bootstrap.min.js"></script>
+    <script src="../static/js/index.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div th:fragment="index_nav">
+            <!-- 导航 -->
+            <div  class="row">
+                <nav class="navbar navbar-default index_nav navbar-static-top">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1"
+                                    data-toggle="collapse" type="button">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <span class="navbar-brand">Sun</span>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav  col-md-4 nav_head">
+                                <li><a href="/">首页</a></li>
+                                <li><a th:href="@{/classify/配置文件}">分类</a></li>
+                                <li><a href="/labels">标签</a></li>
+                                <li><a href="/file">归档</a></li>
+                                <li><a href="/myself">关于我</a></li>
+                                <li><a href="http://8.130.13.37:7778/">聊天室</a></li>
+                            </ul>
+                            <form class="navbar-form navbar-left col-md-4" style="padding: 0;height: 36px;">
+                                <div class="form-group col-md-12" style="position: relative;padding: 0">
+                                    <label class="col-md-10 col-xs-10" style="padding-left:0 ">
+                                        <input class="form-control col-md-12"  id="search_text" placeholder="Search" type="text">
+                                    </label>
+                                    <button class="btn btn-default col-md-2 col-xs-2" style="float: right" type="submit">搜索</button>
+                                    <ul class="search_hint" >
+                                    </ul>
+                                </div>
+                            </form>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a data-target="#myModal"  data-toggle="modal" href="#">登入</a></li>
+                                <li><a data-target="#myModal2" data-toggle="modal" href="#">注册</a></li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </div>
+            <!-- Modal -->
+            <div aria-labelledby="myModalLabel" class="modal fade" id="myModal" role="dialog" tabindex="-1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">登入</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/user/login" class="form-horizontal" method="post">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="User">账号</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" id="User" name="username" placeholder="User" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="Password">密码</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" id="Password" name="password" placeholder="Password" type="password">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"> 记住密码
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button class="btn btn-default" id="login" type="submit">登入</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--模态框-->
+            <div aria-labelledby="myModalLabel" class="modal fade" id="myModal2" role="dialog" tabindex="-1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel2">注册</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="User2">账号</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" id="User2" placeholder="User" type="email">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="Password2">密码</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" id="Password2" placeholder="Password" type="password">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button class="btn btn-default" type="submit">注册</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span  class="navbar-right" th:text="${#httpServletRequest.getAttribute('Error')}"></span>
+        </div>
+        <!-- 中间内容 -->
+        <div class="container book_text">
+            <div class="row">
+                <div class="col-md-8 blog">
+                    <div class="row">
+                        <div class="h4 col-md-10 col-sm-10 col-xs-9">博客</div>
+                        <div class="col-md-2 col-sm-2 col-xs-3">共<span class="pagers" th:text="${blogPage.getTotal()}"></span>篇</div>
+                    </div>
+                    <div  class="oldBlog" th:fragment="blog" >
+                        <div class="row" th:each="blog:${blogPage.getRecords()}">
+                            <div class="pager_text col-md-8 col-sm-8 col-xs-8">
+                                <div>
+                                    <a target="_blank" th:href="@{/blogDetails/}+${blog.id}">
+                                        <div class="h5 text-left" th:text="${blog.title}">
+                                            标题
+                                        </div>
+                                        <div class="text-body"  th:text="${blog.content}">
+                                            基本上都放假不减肥白金卡讲课费被绑架案说法看吧八分裤卡萨本菲卡随机播放康巴什翻倍卡就是不付款节哀顺变附件加快步伐时间把伤口加班费加咖啡包快捷键哈飞科技按实际缴费卡斯柯建安费八级司法部
+                                        </div>
+                                    </a>
+                                    <div class="author">
+                                        <img alt="" src="../static/images/tx.jpeg">
+                                        <span class="info">张三</span><span class="info" th:text="${blog.createTime}"></span>
+                                        <span class="count"> 浏览量: <span th:text="${blog.views}">123</span> </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <img alt="" class="img-responsive" src="../static/images/tx.jpeg">
+                            </div>
+                        </div>
+                        <div class="next2 next row" style="margin-top: 20px" th:value="${blogPage.getPages()}">
+                            <button class="btn btn-default  pull-left youngblue  previous_page" th:value="${blogPage.getCurrent()-1}"  type="button">上一页</button>
+                            <button  class="btn btn-default  pull-right youngblue next_page" th:value="${blogPage.getCurrent()+1}" type="button">下一页</button>
+                        </div>
+                    </div>
+                </div>
+<!--                分类-->
+                <div class="col-md-3 col-md-push-1 hidden-sm hidden-xs">
+                    <div class="row sidebar">
+                        <div class="sidebar_hd">
+                            <span>分类</span><a href="#">more</a>
+                        </div>
+                        <div class="sidebar_by">
+                            <ul>
+                                <li th:each="tp:${typeD.getRecords()}">
+                                    <a href="javascript:" th:text="${tp.name}" th:value="${tp.name}">学习日志</a><span class="badge" th:text="${tp.id}">13</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row sidebar">
+                        <div class="sidebar_hd">
+                            <span>标签</span><a href="#">more</a>
+                        </div>
+                        <div class="sidebar_by">
+                            <a class="btn btn-sm btn-success" href="javascript:" th:each="D:${tagD}" th:text="${D}">方法论</a>
+                        </div>
+                    </div>
+                    <div class="row sidebar">
+                        <div class="sidebar_hd">
+                            <span>最新推荐</span><a href="#">more</a>
+                        </div>
+                        <div class="sidebar_by">
+                            <ul>
+                                <li th:each="D:${blogPage.getRecords()}">
+                                    <a href="javascript:" th:text="${D.title}" th:value="${D.title}">学习日志</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 底部 -->
+        <div class="container-fluid index_bottom row">
+            <div class="row">
+                <ul class="bottom_list">
+                    <li class="col-md-4 col-md-4 hidden-xs"><img alt="扫一扫联系我" src="../static/images/wx.jpg" width="100px"></li>
+                    <li class="col-md-2 col-sm-2 col-xs-6">
+                        <dl>
+                            <dt>最新博客</dt>
+                            <dd>1</dd>
+                            <dd>2</dd>
+                        </dl>
+                    </li>
+                    <li class="col-md-2 col-sm-2 col-xs-6">
+                        <dl>
+                            <dt>联系我</dt>
+                            <dd>Email: 2367283463@qq.com</dd>
+                            <dd>QQ: 2367283463</dd>
+                        </dl>
+                    </li>
+                    <li class="col-md-4 col-sm-4 hidden-xs">
+                        <dl>
+                            <dt>座右铭</dt>
+                            <dd>这是我的个人博客，在这里会分享编程，心得，写作，思考</dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <p>Copyright 2022 -- 2023 @Sun</p>
+            </div>
+        </div>
+        <div class="row hidden-xs" id="music" style="position: absolute;width: 500px;height: 110px;top: 610px;box-shadow: 0 0 10px #ccc;background-color: white">
+            <iframe border="0" frameborder="no" height="450px"   marginheight="0" marginwidth="0" src="//music.163.com/outchain/player?type=0&id=2829883282&auto=1"  style="position: absolute" width="430px"></iframe>
+            <div style="float:right;width: 5%;height: 100px;margin-top: 2%;font-size: 13px;color: #808080cc;">拖住我移动</div>
+        </div>
+    </div>
+</body>
+<script>
+    $(function () {
+        const pages=$(".next2").attr("value");
+        $("body").on("click",".previous_page",function () {
+            let num=$(".previous_page").attr("value");
+            let url="/blogPage/"+num
+            if (num==0){
+                alert("这是第一页")
+            }else {
+                $.ajax({
+                    url:url,
+                    type:"get",
+                    success:function (data) {
+                        $(".oldBlog").remove();
+                        $(".blog").append(data);
+                    }
+                })
+            }
+        })
+        $("body").on("click",".next_page",function () {
+            let num=$(".next_page").attr("value");
+            let url="/blogPage/"+num
+            num=parseInt(num);
+            if (num>pages){
+                alert("这是最后一页了")
+            }else {
+                $.ajax({
+                    url:url,
+                    type:"get",
+                    success:function (data) {
+                        $(".oldBlog").remove();
+                        $(".blog").append(data);
+                    }
+                })
+            }
+        })
+        //搜索提示
+        $("#search_text").bind("input propertychange",function () {
+            if ($(this).val()!=""){
+                $.ajax({
+                    url:"/search_hint"+$("#search_text").val(),
+                    type:"get",
+                    dataType:"json",
+                    success:function (data) {
+                        $(".search_hint").empty()
+                        if(data.length!=0){
+                            for (let i = 0; i < data.length; i++) {
+                                let elem=$("<li></li>").attr("value", data[i].title)
+                                let a=$("<a></a>").attr("href","/blogDetails/"+data[i].id).attr("target","_blank").text( data[i].title)
+                                elem.append(a)
+                                $(".search_hint").append(elem)
+                            }
+                        }else{
+                            $(".search_hint").append("<li>没有查到任何数据</li>")
+                        }
+                    },
+                    error:function () {
+                        alert("出错了")
+                    }
+                })
+            }
+        })
+        //点击该盒子外的空间关闭这个窗口，点击这个盒子不会关闭
+        $("body").click(function (e) {
+            if (!$(e.target).closest(".search_hint").length)
+                $(".search_hint").empty()
+        })
+        //music盒子移动
+        let that = this;
+        var music = $("#music");
+        music.mousedown(function (e) {
+            console.log("ok")
+            //设置移动后的默认位置
+            var endx=0;
+            var endy=0;
+            //获取div的初始位置，要注意的是需要转整型，因为获取到值带px
+            var left= parseInt(music.css("left"));
+            var top = parseInt(music.css("top"));
+            //获取鼠标按下时的坐标，区别于下面的es.pageX,es.pageY
+            var downx=e.pageX;
+            var downy=e.pageY;
+            music.bind('mousemove',function(es){
+                //es.pageX,es.pageY:获取鼠标移动后的坐标
+                var x= es.pageX-downx+left;     //计算div的最终位置
+                var y=es.pageY-downy+top;
+                if (x < 0) {
+                    x = 0;
+                } else if (x > $("body").width - music.outerWidth(true)) {
+                    x = $("body").width - music.outerWidth(true);
+                }
+                if (y < 0) {
+                    y = 0;
+                } else if (y > $("body").height - music.outerHeight(true)) {
+                    y = $("body").height - music.outerHeight(true);
+                }
+                that.Band_left = x
+                that.Band_top = y
+                that.Band_leftMobile = x
+                that.Band_topMobile = y
+                music.css({
+                    'left': x + 'px',
+                    'top': y + 'px'
+                });
+            });
+            music.mouseup(function(){
+                //鼠标弹起时给div取消事件
+                music.unbind("mousemove")
+            })
+            music.mouseleave(function(){
+                //鼠标弹起时给div取消事件
+                music.unbind("mousemove")
+            })
+        })
+
+
+        });
+</script>
+</html>

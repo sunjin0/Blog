@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sun.blog.mapper.TBlogMapper">
+<!--    -->
+<resultMap id="UserAndType" type="com.sun.blog.entity.TBlog">
+    <id property="id" column="id"/>
+    <result property="title" column="title"/>
+    <result property="appreciation" column="appreciation"/>
+    <result property="commentabled" column="commentabled"/>
+    <result property="content" column="content"/>
+    <result property="createTime" column="create_time"/>
+    <result property="firstPicture" column="first_picture"/>
+    <result property="flag" column="flag"/>
+    <result property="published" column="published"/>
+    <result property="recommend" column="recommend"/>
+    <result property="shareStatement" column="share_statement"/>
+    <result property="views" column="views"/>
+    <result property="typeId" column="type_id"/>
+    <result property="userId" column="user_id"/>
+    <result property="updateTime" column="update_time" />
+   <collection property="type" ofType="com.sun.blog.entity.TType">
+       <id property="id" column="id"/>
+       <result property="name" column="name"/>
+   </collection>
+    <collection property="tag" ofType="com.sun.blog.entity.TTag">
+        <id property="id" column="id"/>
+        <result property="tagName" column="tag_name"  />
+    </collection>
+</resultMap>
+    <insert id="blogSave" parameterType="com.sun.blog.entity.TBlog">
+        insert into t_blog(user_id, type_id, views,  title, share_statement, recommend, published, flag, first_picture, create_time, content, commentabled, appreciation, id) VALUE (#{userId},#{typeId},#{views},#{title},#{shareStatement},#{recommend},#{published},#{flag},#{firstPicture},#{createTime},#{content},#{commentabled},#{appreciation},#{id})
+    </insert>
+    <select id="selectPages" resultMap="UserAndType" parameterType="string">
+        select*from t_blog tb ,t_type type where type.id=tb.id
+        <if test="title!=null">
+            and  tb.title=#{title}
+        </if>
+        <if test="type!=null">
+            and  type.name=#{type}
+        </if>
+        <if test="isbBoolean!=null">
+            and  tb.recommend=#{isbBoolean}
+        </if>
+        order by tb.id
+    </select>
+    <select id="selectsByID" resultMap="UserAndType" parameterType="java.lang.Long">
+        select *from t_blog blog , t_type type , t_tag tag where type.id=#{id} and blog.id=#{id} and tag.id=#{id}
+    </select>
+    <select id="selectByTypeName" resultMap="UserAndType" parameterType="java.lang.String">
+        select tb.title,tb.content,tb.id,tb.create_time,tb.views,ty.name from t_blog tb,t_type ty where ty.id=tb.id and ty.name=#{TypeName}
+    </select>
+</mapper>
